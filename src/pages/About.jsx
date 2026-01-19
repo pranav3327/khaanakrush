@@ -39,7 +39,7 @@ export default function About() {
               Perfect for birthdays, house parties, corporate evenings, society events, and pop-ups. We can serve
               modern Indian favourites and curated specials designed for cart cooking.
             </p>
-            <div className="btnRow" style={{ marginTop: 14 }}>
+            <div className="btnRow">
               <Link className="btn btnPrimary" to="/book-event">
                 Book for an Event
               </Link>

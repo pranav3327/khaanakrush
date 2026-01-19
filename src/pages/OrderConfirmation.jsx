@@ -6,10 +6,10 @@ export default function OrderConfirmation() {
   const { orderId } = useParams();
 
   const steps = [
-    { title: 'Order placed', subtitle: 'We’ve received your order and confirmed details.' },
-    { title: 'Food being prepared', subtitle: 'Your items are being cooked fresh in sequence.' },
-    { title: 'Cart on the way', subtitle: 'The cart is dispatched and headed to your location.' },
-    { title: 'Delivered', subtitle: 'Hot, fresh, and ready to enjoy.' }
+    { title: 'Order Confirmed', subtitle: 'We’ve received your booking details.' },
+    { title: 'Prep & Dispatch', subtitle: 'Ingredients are being prepped and cart is on the way.' },
+    { title: 'Cart Arrived', subtitle: 'Our team has arrived at your location.' },
+    { title: 'Cooking Live', subtitle: 'Your food is being cooked fresh on-site.' }
   ];
 
   return (
@@ -33,9 +33,18 @@ export default function OrderConfirmation() {
         </div>
 
         <div className="trackWrap card">
-          <div className="trackTitle">Live Tracking (UI preview)</div>
+          <div className="trackTitle">Live Tracking</div>
           <div className="trackHint">
-            This is a static layout for now — real-time updates can be added later.
+            Track your cart's journey to your location.
+          </div>
+
+          <div className="mapContainer" aria-label="Map showing cart location">
+            <div className="mapPin">
+              <div className="pinIcon">
+                <div className="pinPulse" />
+              </div>
+              <div className="mapLabel">Cart is preparing</div>
+            </div>
           </div>
 
           <div className="timeline" role="list">

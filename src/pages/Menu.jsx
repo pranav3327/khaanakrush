@@ -1,7 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useCart } from '../context/CartContext';
 import MenuItemCard from '../components/MenuItemCard.jsx';
-import CartSidebar from '../components/CartSidebar.jsx';
 import './Menu.css';
 import './FormPage.css';
 import { fetchMenuItems } from '../services/menuService';
@@ -16,13 +15,11 @@ function resolveImageUrl(url) {
 }
 
 export default function Menu() {
-  const navigate = useNavigate();
+  const { addToCart } = useCart();
 
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
-  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     let cancelled = false;
@@ -52,80 +49,40 @@ export default function Menu() {
     };
   }, []);
 
-  const cartItems = useMemo(() => cart, [cart]);
-
-  function addToCart(item) {
-    setCart((prev) => {
-      const idx = prev.findIndex((p) => p.id === item.id);
-      if (idx >= 0) {
-        const copy = [...prev];
-        copy[idx] = { ...copy[idx], quantity: copy[idx].quantity + 1 };
-        return copy;
-      }
-      return [...prev, { id: item.id, name: item.name, price: item.price, quantity: 1 }];
-    });
-  }
-
-  function inc(ci) {
-    setCart((prev) => prev.map((p) => (p.id === ci.id ? { ...p, quantity: p.quantity + 1 } : p)));
-  }
-  function dec(ci) {
-    setCart((prev) =>
-      prev
-        .map((p) => (p.id === ci.id ? { ...p, quantity: Math.max(1, p.quantity - 1) } : p))
-        .filter(Boolean)
-    );
-  }
-  function remove(ci) {
-    setCart((prev) => prev.filter((p) => p.id !== ci.id));
-  }
-
-  function onOrderPlaced(orderId) {
-    const id = orderId || 'new';
-    setCart([]);
-    navigate(`/order-confirmation/${id}`);
-  }
-
   return (
     <div className="pagePad">
       <div className="container">
         <div className="pageHeader">
-          <div className="kicker">Menu</div>
-          <h1 className="title">Place a Food Order</h1>
+          <div className="kicker">Pre-order Menu</div>
+          <h1 className="title">Select Your Cart Menu</h1>
           <p className="subtitle">
-            Curated modern Indian flavours designed for cart cooking — consistent, hot, and premium.
+            Choose the dishes you want us to cook at your location. We bring the cart, ingredients, and chef.
           </p>
         </div>
 
-        <div className="menuLayout">
-          <div className="menuLeft">
-            {loading ? (
-              <div className="card menuState">
-                <div className="menuStateTitle">Loading menu…</div>
-                <div className="menuStateText">Fetching today’s cooked-fresh selection.</div>
-              </div>
-            ) : error ? (
-              <div className="card menuState">
-                <div className="menuStateTitle">Could not load the menu</div>
-                <div className="menuStateText">{error}</div>
-                <div className="menuStateText">Make sure the backend is running and `VITE_API_URL` is set.</div>
-              </div>
-            ) : (
-              <div className="menuGrid">
-                {items.map((item) => (
-                  <MenuItemCard key={item.id} item={item} onAdd={addToCart} />
-                ))}
-              </div>
-            )}
-          </div>
-
-          <CartSidebar
-            cartItems={cartItems}
-            onInc={inc}
-            onDec={dec}
-            onRemove={remove}
-            onOrderPlaced={onOrderPlaced}
-          />
+        <div className="menuFullWidth">
+          {loading ? (
+            <div className="menuState">
+              <div className="menuStateTitle">Loading Menu...</div>
+              <div className="menuStateText">Getting the freshest dishes for you.</div>
+            </div>
+          ) : error ? (
+            <div className="menuState">
+              <div className="menuStateTitle">Menu Unavailable</div>
+              <div className="menuStateText">{error}</div>
+            </div>
+          ) : !items.length ? (
+            <div className="menuState">
+              <div className="menuStateTitle">No Items Found</div>
+              <div className="menuStateText">Please check back later.</div>
+            </div>
+          ) : (
+            <div className="menuGrid">
+              {items.map((it) => (
+                <MenuItemCard key={it.id} item={it} onAdd={addToCart} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

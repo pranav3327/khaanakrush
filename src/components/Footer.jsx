@@ -98,9 +98,24 @@ export default function Footer() {
             <Link className="footerLink" to="/menu">
               Menu
             </Link>
+          </div>
+        </div>
+
+        <div className="footerContact card">
+          <div className="footerTitle">Contact</div>
+          <div className="linkList">
+            <a className="footerLink" href="tel:+919876543210">
+              +91 98765 43210
+            </a>
+            <a className="footerLink" href="mailto:hello@khanakrush.com">
+              hello@khanakrush.com
+            </a>
             <Link className="footerLink" to="/contact">
-              Contact Us
+              Support
             </Link>
+            <div className="footerLink" style={{ pointerEvents: 'none', opacity: 0.7 }}>
+              Mumbai, India
+            </div>
           </div>
         </div>
       </div>

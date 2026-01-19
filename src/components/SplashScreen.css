@@ -1,0 +1,260 @@
+.splashContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0b0b0f;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+  overflow: hidden;
+}
+
+.splashExit {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.splashContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  z-index: 5;
+  padding: 40px;
+}
+
+/* --- Drift Scene --- */
+.driftScene {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  /* Shake screen on impact */
+  animation: cameraShake 0.4s cubic-bezier(.36,.07,.19,.97) both 0.9s;
+}
+
+.spotlight {
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 400px;
+  background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.15), transparent 70%);
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  animation: spotlightOn 0.3s ease forwards 1.2s;
+}
+
+.cartWrapper {
+  width: 160px;
+  height: 160px;
+  position: relative;
+  z-index: 2;
+  /* Animation: Enter fast, drift/skid, stop */
+  animation: driftEnter 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.cartSvg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+}
+
+/* Wheels spin */
+.wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: wheelSpin 1.5s ease-out forwards;
+}
+
+/* Steam rising after stop */
+.steam {
+  opacity: 0;
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  animation: steamRise 2s ease-out infinite;
+}
+.steam.s1 { animation-delay: 1.4s; }
+.steam.s2 { animation-delay: 1.6s; }
+.steam.s3 { animation-delay: 1.8s; }
+
+.speedLine {
+  opacity: 0;
+  animation: speedLineAnim 1s linear infinite;
+}
+.speedLine.delay1 {
+  animation-delay: 0.2s;
+}
+
+.skidMarks {
+  position: absolute;
+  bottom: 30px;
+  left: -20px;
+  width: 100px;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  transform-origin: right center;
+  transform: scaleX(0);
+  border-radius: 4px;
+  animation: skidShow 2s ease forwards;
+}
+
+/* Smoke Particles */
+.smokeParticles {
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  pointer-events: none;
+}
+.smokeParticles span {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  opacity: 0;
+}
+.p1 {
+  width: 15px; height: 15px; left: 10px;
+  animation: smokePuff 0.6s ease-out forwards 0.8s;
+}
+.p2 {
+  width: 25px; height: 25px; left: -10px;
+  animation: smokePuff 0.7s ease-out forwards 0.85s;
+}
+.p3 {
+  width: 10px; height: 10px; left: 30px;
+  animation: smokePuff 0.5s ease-out forwards 0.9s;
+}
+
+.road {
+  position: absolute;
+  bottom: 40px;
+  left: -50%;
+  width: 200%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(217, 179, 95, 0.3), transparent);
+  z-index: 1;
+}
+
+/* --- Typography --- */
+.splashTitle {
+  font-family: var(--serif);
+  font-size: 3rem;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: textReveal 0.8s ease forwards 1.2s; /* Start after cart settles */
+}
+
+.splashText {
+  color: #fff;
+}
+.splashText.highlight {
+  background: linear-gradient(135deg, var(--gold2), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.splashSubtitle {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.6);
+  opacity: 0;
+  animation: textReveal 0.8s ease forwards 1.6s;
+}
+
+/* --- Keyframes --- */
+
+@keyframes driftEnter {
+  0% {
+    transform: translateX(500px) skewX(-20deg) scale(0.9);
+    opacity: 0;
+  }
+  40% {
+    /* The "Skid" moment - overshoot */
+    transform: translateX(-30px) skewX(15deg) rotate(-5deg) scale(1.05);
+    opacity: 1;
+  }
+  60% {
+    /* Correction / Bounce back */
+    transform: translateX(10px) skewX(-5deg) rotate(3deg);
+  }
+  80% {
+    /* Slight settle */
+    transform: translateX(-5px) skewX(2deg) rotate(-1deg);
+  }
+  100% {
+    /* Stop */
+    transform: translateX(0) skewX(0) rotate(0) scale(1);
+  }
+}
+
+@keyframes wheelSpin {
+  0% { transform: rotate(0deg); }
+  40% { transform: rotate(-720deg); } /* Fast spin during entry */
+  100% { transform: rotate(-720deg); } /* Stop */
+}
+
+@keyframes steamRise {
+  0% { opacity: 0; transform: translateY(0) scale(1); }
+  50% { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(-20px) scale(1.5); }
+}
+
+@keyframes smokePuff {
+  0% { opacity: 0.6; transform: scale(0.5) translate(0, 0); }
+  100% { opacity: 0; transform: scale(2) translate(-20px, -10px); }
+}
+
+@keyframes skidShow {
+  0%, 30% { opacity: 0; transform: scaleX(0); }
+  40% { opacity: 1; transform: scaleX(1); }
+  70% { opacity: 0; transform: scaleX(0.5) translateX(-50px); }
+  100% { opacity: 0; }
+}
+
+@keyframes speedLineAnim {
+  0% { transform: translateX(20px); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(-40px); opacity: 0; }
+}
+
+@keyframes textReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spotlightOn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cameraShake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-2px, 0, 0); }
+  40%, 60% { transform: translate3d(2px, 0, 0); }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+  .splashTitle { font-size: 2rem; }
+  .cartWrapper { width: 120px; height: 120px; }
+}

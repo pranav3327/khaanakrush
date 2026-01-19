@@ -62,6 +62,11 @@
   color: rgba(255,255,255,.98);
   text-shadow: 0 18px 60px rgba(0,0,0,.55);
 }
+.highlight {
+  color: var(--gold);
+  text-shadow: 0 0 30px rgba(217, 179, 95, 0.4);
+}
+
 .heroCtaMeta{
   display:flex;
   gap: 22px;
@@ -85,26 +90,7 @@
   font-size: 12px;
 }
 
-.heroBtnPrimary{
-  background: rgba(255,255,255,.98);
-  color: #111;
-  padding: 12px 22px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-.heroBtnGhost{
-  background: transparent;
-  border: 2px solid rgba(255,255,255,.92);
-  color: rgba(255,255,255,.96);
-  padding: 10px 22px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-.heroBtnGhost:hover{
-  background: rgba(255,255,255,.08);
-}
+
 
 .heroBadges{
   display:flex;
@@ -155,11 +141,21 @@
 }
 .panelTitle{
   font-family: var(--serif);
-  font-size: 16px;
+  font-size: 20px;
+  background: linear-gradient(135deg, var(--gold2), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
 }
 .panelTag{
   color: rgba(243,241,236,.60);
-  font-size: 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 1px solid rgba(255,255,255,.15);
+  padding: 4px 8px;
+  border-radius: 99px;
+  background: rgba(255,255,255,.05);
 }
 .panelList{
   display:flex;
@@ -167,21 +163,43 @@
   gap: 10px;
 }
 .panelItem{
-  padding: 12px 12px;
+  padding: 16px;
   border-radius: 16px;
   border: 1px solid rgba(255,255,255,.10);
-  background: rgba(0,0,0,.18);
+  background: rgba(255,255,255,.03);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.panelItem:hover {
+  background: rgba(255,255,255,.06);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
 }
 .panelItemName{
   font-family: var(--serif);
   letter-spacing:.2px;
-  font-size: 15px;
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 4px;
 }
 .panelItemMeta{
   margin-top: 6px;
   color: rgba(243,241,236,.70);
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.55;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.panelItemMeta::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: var(--gold);
+  border-radius: 50%;
 }
 .panelDivider{
   height:1px;
@@ -189,43 +207,200 @@
   margin: 14px 0 12px;
 }
 .panelSteps{
-  display:flex;
-  flex-direction:column;
-  gap: 12px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
 }
 .panelStep{
   display:flex;
-  gap: 12px;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
   padding: 12px 12px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(0,0,0,.18);
+  background: transparent;
+  border: none;
 }
 .panelNum{
+  font-size: 32px;
+  margin-bottom: 16px;
   font-weight: 850;
-  color: rgba(242,213,138,.92);
+  color: var(--gold);
   letter-spacing: 1px;
-  min-width: 34px;
 }
 .panelStepTitle{
+  font-size: 18px;
+  margin-bottom: 8px;
   font-weight: 750;
-  font-size: 13px;
 }
 .panelStepText{
-  margin-top: 4px;
+  font-size: 14px;
   color: rgba(243,241,236,.70);
-  font-size: 12px;
   line-height: 1.5;
 }
 
-.featureGrid{
-  margin-top: 18px;
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+@media (max-width: 980px){
+  .heroGrid{ grid-template-columns: 1fr; }
+  .featureGrid{ grid-template-columns: 1fr; }
+  .panelSteps{ grid-template-columns: 1fr; }
+  .ctaBar{ flex-direction:column; align-items:flex-start; }
 }
-.feature{
-  padding: 16px 16px;
+
+.dishCard {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  /* Inherit glass-card properties manually or via composition if using preprocessor, here we redefine for specificity */
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px; /* More rounded for Gen Z look */
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.dishCard:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  border-color: rgba(217, 179, 95, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dishCardGlow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(217, 179, 95, 0.1), transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.dishCard:hover .dishCardGlow {
+  opacity: 1;
+}
+
+.dishCardImage {
+  width: 100%;
+  height: 280px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.dishCardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.6));
+  transition: transform 0.5s ease;
+}
+
+.dishCard:hover .dishCardImage img {
+  transform: scale(1.05) rotate(2deg);
+}
+
+.dishCardContent {
+  position: relative;
+  z-index: 1;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.dishTag {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  border: 1px solid rgba(217, 179, 95, 0.3);
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  background: rgba(217, 179, 95, 0.05);
+}
+
+.dishTitle {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.dishDesc {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.dishMeta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.dishPrice {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.dishBtn {
+  background: var(--gold);
+  color: #000;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dishBtn:hover {
+  background: #fff;
+  transform: scale(1.05);
+}
+
+/* Feature grid enhancements */
+.featureGrid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.feature {
+  padding: 24px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.feature:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 .featureIcon{
   width: 38px;

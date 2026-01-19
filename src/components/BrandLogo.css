@@ -1,0 +1,97 @@
+.brandLogoSvg {
+  width: 260px;
+  height: 50px;
+  overflow: visible;
+}
+
+.letter-group {
+  /* Common group styles */
+}
+
+/* Stroke Styles */
+.stroke-vertical,
+.stroke-diag-up,
+.stroke-diag-down,
+.stroke-horiz,
+.stroke-peak,
+.stroke-curved {
+  stroke: #fff;
+  stroke-width: 1.8;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+/* --- ANIMATION TARGETS --- */
+
+/* 1. VERTICAL Stretch (Main stems) */
+.stroke-vertical {
+  transform-origin: top; /* Grow from top down */
+  transform-box: fill-box;
+  animation: extendDown 4.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* 2. PEAK Stretch (For A - grows Up) */
+.stroke-peak {
+  transform-origin: bottom center; /* Grow Up from base */
+  transform-box: fill-box;
+  animation: extendPeak 4.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* 3. DIAGONAL UP (K arm) */
+.stroke-diag-up {
+  transform-origin: bottom left; /* From connection point */
+  transform-box: fill-box;
+  animation: extendDiagUp 4.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* 4. DIAGONAL DOWN (K leg, R leg, N diag) */
+.stroke-diag-down {
+  transform-origin: top left;
+  transform-box: fill-box;
+  animation: extendDiagDown 4.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* 5. CURVED (S, R head, U) - Center scale */
+.stroke-curved {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: extendCenter 4.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* --- KEYFRAMES (Moderate Intensity) --- */
+
+@keyframes extendDown {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.25); }
+}
+
+@keyframes extendPeak {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1) translateY(-2px); }
+}
+
+@keyframes extendDiagUp {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+@keyframes extendDiagDown {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+@keyframes extendCenter {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* --- DELAYS (Grouped 1-5 with H-stagger) --- */
+.anim-delay-1 { animation-delay: 0.0s; }
+.anim-delay-1-5 { animation-delay: 0.45s; } /* H second leg */
+.anim-delay-2 { animation-delay: 0.9s; }
+.anim-delay-3 { animation-delay: 1.8s; }
+.anim-delay-3-5 { animation-delay: 2.25s; } /* H second leg */
+.anim-delay-4 { animation-delay: 2.7s; }
+.anim-delay-5 { animation-delay: 3.6s; }

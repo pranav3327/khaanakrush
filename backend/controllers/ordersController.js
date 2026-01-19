@@ -7,7 +7,7 @@ function isValidPhone(phone) {
 
 async function createOrder(req, res, next) {
   try {
-    const { customer_name, phone, delivery_location, items } = req.body || {};
+    const { customer_name, phone, delivery_location, items, event_date, event_time } = req.body || {};
 
     if (!String(customer_name || '').trim()) {
       return res.status(400).json({ message: 'customer_name is required.' });
@@ -21,6 +21,11 @@ async function createOrder(req, res, next) {
     if (!Array.isArray(items) || items.length === 0) {
       return res.status(400).json({ message: 'items must be a non-empty array.' });
     }
+
+    // Append event date/time to location to avoid schema changes for now
+    let finalLocation = String(delivery_location).trim();
+    if (event_date) finalLocation += ` | Date: ${event_date}`;
+    if (event_time) finalLocation += ` | Time: ${event_time}`;
 
     for (const it of items) {
       const id = Number(it?.menu_item_id);
@@ -36,7 +41,7 @@ async function createOrder(req, res, next) {
     const result = await createOrderWithItems({
       customer_name: String(customer_name).trim(),
       phone: String(phone).trim(),
-      delivery_location: String(delivery_location).trim(),
+      delivery_location: finalLocation,
       items
     });
 

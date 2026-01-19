@@ -1,20 +1,22 @@
 import { NavLink, useLocation } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import BrandLogo from './BrandLogo';
 import './Navbar.css';
 
 export default function Navbar() {
   const location = useLocation();
+  const { cartCount } = useCart();
   const isHome = location.pathname === '/';
 
   return (
     <header className="navWrap">
       <div className="container navInner">
-        <div className="brand">
+        <NavLink to="/" className="brand">
           <div className="brandMark" aria-hidden="true" />
           <div className="brandText">
-            <div className="brandName">KhaanaKrush</div>
-            <div className="brandTag">Cooked-fresh cart cuisine</div>
+            <BrandLogo />
           </div>
-        </div>
+        </NavLink>
 
         <nav className="navLinks" aria-label="Primary">
           <NavLink end to="/" className={({ isActive }) => (isActive ? 'navLink active' : 'navLink')}>
@@ -44,8 +46,12 @@ export default function Navbar() {
         </nav>
 
         <div className="navCta">
+          <NavLink to="/cart" className="navCartLink">
+            <span className="navCartIcon">🛒</span>
+            {cartCount > 0 && <span className="navCartBadge">{cartCount}</span>}
+          </NavLink>
           <NavLink to="/menu" className="navButton">
-            {isHome ? 'Order Now' : 'Order'}
+            {isHome ? 'Pre-Order Now' : 'Pre-Order'}
           </NavLink>
         </div>
       </div>

@@ -3,51 +3,144 @@
   display:flex;
   flex-direction:column;
   min-height: 100%;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.menuCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  border-color: rgba(217,179,95,.3);
 }
 
 .menuImgWrap{
   position:relative;
-  height: 160px;
-  border-bottom: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.04);
+  height: 220px;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.05), transparent 70%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 }
+
 .menuImg{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit: contain; /* changed from cover to contain for better food presentation */
   display:block;
-  filter: saturate(1.06) contrast(1.02);
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+  transition: transform 0.4s ease;
+}
+
+.menuCard:hover .menuImg {
+  transform: scale(1.1) rotate(2deg);
 }
 
 .menuBody{
-  padding: 14px 14px 16px;
+  padding: 18px 20px 24px;
   display:flex;
   flex-direction:column;
-  gap:10px;
+  flex: 1;
+  transition: all 0.3s ease;
 }
+
 .menuName{
   font-family: var(--serif);
-  font-size: 16px;
-  letter-spacing:.2px;
+  font-size: 20px;
+  letter-spacing:.3px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  text-align: center; /* Center the name */
+  margin-top: auto;   /* Push to vertical center */
+  margin-bottom: auto;
 }
+
+.menuDetails {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center; /* Center details */
+}
+
+.menuCard:hover .menuDetails {
+  max-height: 300px; /* Allow expansion */
+  opacity: 1;
+  transform: translateY(0);
+  margin-top: 16px;
+}
+
+.menuCard:hover .menuName {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .menuMeta{
   display:flex;
   align-items:center;
-  gap:10px;
-  color: rgba(243,241,236,.72);
+  gap:12px;
   font-size: 13px;
+  margin-bottom: 4px;
 }
+
 .menuPrice{
-  color: rgba(242,213,138,.95);
+  color: var(--gold);
   font-weight: 700;
+  font-size: 18px;
 }
+
+.menuDot {
+  color: rgba(255,255,255,0.2);
+}
+
+.menuNote{
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.7);
+}
+
 .menuDesc{
-  color: rgba(243,241,236,.70);
+  color: rgba(243,241,236,.60);
   font-size: 13px;
-  line-height: 1.55;
-  min-height: 40px;
+  line-height: 1.6;
+  /* min-height: 42px; Removed fixed height to let it collapse naturally */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: center;
 }
+
 .menuAdd{
-  align-self:flex-start;
+  margin-top: auto;
+  align-self: flex-start;
+  width: 100%;
+  text-align: center;
+  padding: 12px;
+  font-size: 13px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+  box-shadow: none;
+}
+
+.menuAdd:hover {
+  background: var(--gold);
+  color: #000;
+  border-color: var(--gold);
 }
 

@@ -40,7 +40,7 @@ export default function Franchise() {
               Share your city and business background, and we’ll schedule a short call to evaluate fit, discuss unit
               economics, and outline the rollout plan.
             </p>
-            <div className="btnRow" style={{ marginTop: 14 }}>
+            <div className="btnRow">
               <Link className="btn btnPrimary" to="/contact">
                 Contact the Team
               </Link>
