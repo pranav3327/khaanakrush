@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b12"/>
+      <stop offset="0.55" stop-color="#0f0c0a"/>
+      <stop offset="1" stop-color="#07070a"/>
+    </linearGradient>
+    <radialGradient id="v" cx="50%" cy="45%" r="75%">
+      <stop offset="0" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="1" stop-color="rgba(0,0,0,0.55)"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="rgba(0,0,0,0.55)"/>
+    </filter>
+    <linearGradient id="bean" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6b4a2f"/>
+      <stop offset="0.55" stop-color="#3f2414"/>
+      <stop offset="1" stop-color="#1a0e08"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="rgba(255,255,255,0.18)"/>
+      <stop offset="0.4" stop-color="rgba(255,255,255,0.06)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+
+    <!-- reusable "bean" -->
+    <g id="beanShape">
+      <ellipse cx="0" cy="0" rx="22" ry="16" fill="url(#bean)"/>
+      <path d="M-6 -14c9 8 9 20 0 28" stroke="rgba(0,0,0,0.25)" stroke-width="3.2" stroke-linecap="round"/>
+      <path d="M-4 -12c7 6 7 16 0 24" stroke="rgba(255,255,255,0.10)" stroke-width="1.4" stroke-linecap="round"/>
+      <ellipse cx="6" cy="-6" rx="14" ry="8" fill="url(#sheen)" opacity="0.55"/>
+    </g>
+
+    <!-- pattern tile with many small beans (photo-like texture) -->
+    <pattern id="beans" width="180" height="180" patternUnits="userSpaceOnUse">
+      <g filter="url(#shadow)" opacity="0.98">
+        <use href="#beanShape" x="25" y="28" transform="rotate(-18 25 28)"/>
+        <use href="#beanShape" x="78" y="22" transform="rotate(12 78 22)"/>
+        <use href="#beanShape" x="132" y="30" transform="rotate(-6 132 30)"/>
+
+        <use href="#beanShape" x="38" y="84" transform="rotate(22 38 84)"/>
+        <use href="#beanShape" x="96" y="76" transform="rotate(-14 96 76)"/>
+        <use href="#beanShape" x="150" y="88" transform="rotate(10 150 88)"/>
+
+        <use href="#beanShape" x="22" y="140" transform="rotate(8 22 140)"/>
+        <use href="#beanShape" x="74" y="150" transform="rotate(-20 74 150)"/>
+        <use href="#beanShape" x="126" y="148" transform="rotate(16 126 148)"/>
+        <use href="#beanShape" x="164" y="136" transform="rotate(-10 164 136)"/>
+      </g>
+    </pattern>
+  </defs>
+
+  <rect width="1800" height="1200" fill="url(#bg)"/>
+  <rect width="1800" height="1200" fill="url(#beans)" opacity="0.95"/>
+  <rect width="1800" height="1200" fill="url(#beans)" opacity="0.55" transform="rotate(7 900 600) scale(1.08)"/>
+  <rect width="1800" height="1200" fill="url(#beans)" opacity="0.40" transform="rotate(-9 900 600) scale(1.14)"/>
+
+  <rect width="1800" height="1200" fill="url(#v)"/>
+</svg>
+

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b12"/>
+      <stop offset="0.55" stop-color="#0f1a16"/>
+      <stop offset="1" stop-color="#07070a"/>
+    </linearGradient>
+    <radialGradient id="mintGlow" cx="25%" cy="25%" r="70%">
+      <stop offset="0" stop-color="rgba(61,220,151,0.30)"/>
+      <stop offset="1" stop-color="rgba(61,220,151,0)"/>
+    </radialGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="rgba(255,255,255,0.16)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0.05)"/>
+    </linearGradient>
+    <linearGradient id="tortilla" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2d58a"/>
+      <stop offset="1" stop-color="#d9b35f"/>
+    </linearGradient>
+    <linearGradient id="salsa" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff6b3d"/>
+      <stop offset="1" stop-color="#b53a12"/>
+    </linearGradient>
+    <linearGradient id="guac" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7ee7b8"/>
+      <stop offset="1" stop-color="#2bb673"/>
+    </linearGradient>
+    <filter id="soft" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="900" rx="42" fill="url(#bg)"/>
+  <rect width="1400" height="900" rx="42" fill="url(#mintGlow)"/>
+
+  <!-- plate -->
+  <g>
+    <ellipse cx="1020" cy="540" rx="310" ry="210" fill="url(#plate)" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+    <ellipse cx="1020" cy="540" rx="240" ry="165" fill="rgba(0,0,0,0.18)" stroke="rgba(255,255,255,0.10)" stroke-width="2"/>
+  </g>
+
+  <!-- tacos -->
+  <g filter="url(#soft)" opacity="0.9">
+    <path d="M870 560c25-90 85-140 160-140 75 0 135 50 160 140-40 40-100 70-160 70-60 0-120-30-160-70Z" fill="url(#tortilla)"/>
+    <path d="M905 545c18-58 62-92 125-92 63 0 107 34 125 92-30 28-78 46-125 46-47 0-95-18-125-46Z" fill="rgba(0,0,0,0.22)"/>
+  </g>
+
+  <!-- fillings -->
+  <g>
+    <path d="M900 515c40-35 90-48 130-40 30 6 55 22 70 45-55 55-145 60-200-5Z" fill="url(#salsa)" opacity="0.88"/>
+    <path d="M930 535c35-28 78-34 110-22 18 7 32 18 42 32-42 35-108 36-152-10Z" fill="url(#guac)" opacity="0.88"/>
+    <circle cx="1006" cy="520" r="10" fill="rgba(255,255,255,0.78)" opacity="0.35"/>
+    <circle cx="1040" cy="536" r="8" fill="rgba(255,255,255,0.78)" opacity="0.28"/>
+    <circle cx="975" cy="544" r="7" fill="rgba(255,255,255,0.78)" opacity="0.25"/>
+  </g>
+
+  <!-- garnish dots -->
+  <g fill="rgba(242,213,138,0.75)">
+    <circle cx="930" cy="610" r="4"/>
+    <circle cx="960" cy="635" r="3"/>
+    <circle cx="1010" cy="645" r="4"/>
+    <circle cx="1095" cy="628" r="3"/>
+    <circle cx="1120" cy="600" r="4"/>
+  </g>
+
+  <!-- label -->
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <text x="90" y="160" font-size="56" fill="rgba(243,241,236,0.94)" letter-spacing="0.8">Mexican Street Plate</text>
+    <text x="90" y="210" font-size="18" fill="rgba(243,241,236,0.68)" letter-spacing="4">CRISP • SPICY • MODERN</text>
+    <text x="90" y="270" font-size="16" fill="rgba(243,241,236,0.70)" style="font-family: ui-sans-serif, system-ui;">Bold flavours, clean plating — built for a premium crowd.</text>
+  </g>
+</svg>
+

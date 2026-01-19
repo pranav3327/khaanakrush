@@ -1,0 +1,35 @@
+.pagePad{
+  padding: 44px 0 62px;
+}
+
+.pageHeader{
+  margin-bottom: 16px;
+}
+
+.formCard{
+  padding: 18px 16px;
+}
+
+.formActions{
+  display:flex;
+  gap: 12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.mutedNote{
+  color: rgba(243,241,236,.62);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.split{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 820px){
+  .split{ grid-template-columns: 1fr; }
+}
+

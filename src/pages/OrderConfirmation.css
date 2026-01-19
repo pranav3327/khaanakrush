@@ -1,0 +1,107 @@
+.confirmHero{
+  padding: 20px 18px;
+  margin-bottom: 16px;
+}
+.confirmKicker{
+  color: rgba(242,213,138,.92);
+  letter-spacing:2.2px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.confirmTitle{
+  margin-top: 10px;
+  font-family: var(--serif);
+  font-size: 28px;
+  line-height: 1.2;
+}
+.confirmMeta{
+  margin-top: 10px;
+  display:flex;
+  align-items:baseline;
+  gap: 10px;
+  color: rgba(243,241,236,.72);
+  font-size: 13px;
+}
+.confirmLabel{
+  color: rgba(243,241,236,.58);
+}
+.confirmId{
+  font-weight: 750;
+  letter-spacing: .8px;
+  color: rgba(243,241,236,.92);
+}
+.confirmActions{
+  margin-top: 14px;
+  display:flex;
+  gap: 12px;
+  flex-wrap:wrap;
+}
+
+.trackWrap{
+  padding: 18px 16px;
+}
+.trackTitle{
+  font-family: var(--serif);
+  font-size: 18px;
+}
+.trackHint{
+  margin-top: 6px;
+  color: rgba(243,241,236,.68);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.timeline{
+  margin-top: 14px;
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+}
+.tRow{
+  display:grid;
+  grid-template-columns: 24px 1fr;
+  gap: 12px;
+}
+.tLeft{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.tDot{
+  width: 12px;
+  height: 12px;
+  border-radius:50%;
+  border: 1px solid rgba(255,255,255,.26);
+  background: rgba(255,255,255,.06);
+  box-shadow: 0 0 0 4px rgba(255,255,255,.06);
+}
+.tDot.active{
+  border-color: rgba(217,179,95,.55);
+  background: linear-gradient(135deg, var(--gold2), var(--gold));
+  box-shadow: 0 0 0 4px rgba(217,179,95,.16);
+}
+.tLine{
+  width: 2px;
+  flex:1;
+  background: rgba(255,255,255,.10);
+  margin-top: 8px;
+  border-radius: 2px;
+}
+.tBody{
+  padding: 12px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.18);
+}
+.tTitle{
+  font-weight: 750;
+  font-size: 13px;
+}
+.tSub{
+  margin-top: 6px;
+  color: rgba(243,241,236,.70);
+  font-size: 12px;
+  line-height: 1.55;
+}
+

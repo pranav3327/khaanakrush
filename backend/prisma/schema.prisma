@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model menu_items {
+  id           BigInt   @id @default(autoincrement())
+  name         String   @db.VarChar(160)
+  description  String?  @db.VarChar(320)
+  price        Decimal  @db.Decimal(10, 2)
+  image_url    String   @db.VarChar(255)
+  is_veg       Boolean  @default(true)
+  is_available Boolean  @default(true)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  order_items  order_items[]
+}
+
+model orders {
+  id                BigInt   @id @default(autoincrement())
+  customer_name     String   @db.VarChar(120)
+  phone             String   @db.VarChar(20)
+  delivery_location String   @db.VarChar(240)
+  total_amount      Decimal  @db.Decimal(10, 2) @default(0)
+  status            String   @db.VarChar(20)    @default("placed")
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+  order_items       order_items[]
+}
+
+model order_items {
+  id          BigInt   @id @default(autoincrement())
+  order_id    BigInt
+  menu_item_id BigInt
+  quantity    Int
+  price_each  Decimal  @db.Decimal(10, 2)
+  line_total  Decimal  @db.Decimal(10, 2)
+  created_at  DateTime @default(now())
+
+  orders      orders     @relation(fields: [order_id], references: [id], onDelete: Cascade)
+  menu_items  menu_items @relation(fields: [menu_item_id], references: [id], onDelete: Restrict)
+
+  @@index([order_id])
+  @@index([menu_item_id])
+}
+
+model event_bookings {
+  id               BigInt   @id @default(autoincrement())
+  name             String   @db.VarChar(120)
+  phone            String   @db.VarChar(20)
+  event_type       String   @db.VarChar(80)
+  event_date       DateTime @db.Date
+  number_of_people Int
+  location         String   @db.VarChar(240)
+  created_at       DateTime @default(now())
+  @@index([event_date])
+}
+
+model cart_reservations {
+  id             BigInt   @id @default(autoincrement())
+  name           String   @db.VarChar(120)
+  phone          String   @db.VarChar(20)
+  city           String   @db.VarChar(120)
+  date           DateTime @db.Date
+  duration_hours Int
+  created_at     DateTime @default(now())
+  @@index([date])
+}
+
+model contact_messages {
+  id        BigInt   @id @default(autoincrement())
+  name      String   @db.VarChar(120)
+  email     String   @db.VarChar(190)
+  message   String   @db.Text
+  created_at DateTime @default(now())
+}
+
+model reviews {
+  id        BigInt   @id @default(autoincrement())
+  name      String   @db.VarChar(120)
+  rating    Int
+  comment   String   @db.Text
+  created_at DateTime @default(now())
+  @@index([created_at])
+}
+
+model franchise_applications {
+  id                          BigInt   @id @default(autoincrement())
+  name                        String   @db.VarChar(120)
+  phone                       String   @db.VarChar(20)
+  city                        String   @db.VarChar(120)
+  investment_range            String   @db.VarChar(40)
+  previous_business_experience String   @db.VarChar(8)
+  created_at                  DateTime @default(now())
+  @@index([created_at])
+}
+
+model users {
+  id         BigInt   @id @default(autoincrement())
+  name       String   @db.VarChar(120)
+  email      String?  @db.VarChar(190)
+  phone      String?  @db.VarChar(20)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  @@unique([email])
+}

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b12"/>
+      <stop offset="0.55" stop-color="#0f1a16"/>
+      <stop offset="1" stop-color="#07070a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="28%" cy="22%" r="72%">
+      <stop offset="0" stop-color="rgba(61,220,151,0.30)"/>
+      <stop offset="1" stop-color="rgba(61,220,151,0)"/>
+    </radialGradient>
+    <linearGradient id="tortilla" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2d58a"/>
+      <stop offset="1" stop-color="#d9b35f"/>
+    </linearGradient>
+    <linearGradient id="salsa" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff6b3d"/>
+      <stop offset="1" stop-color="#b53a12"/>
+    </linearGradient>
+    <linearGradient id="guac" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7ee7b8"/>
+      <stop offset="1" stop-color="#2bb673"/>
+    </linearGradient>
+    <filter id="soft" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="900" rx="42" fill="url(#bg)"/>
+  <rect width="1400" height="900" rx="42" fill="url(#glow)"/>
+
+  <g filter="url(#soft)" opacity="0.95">
+    <path d="M520 650c40-140 140-220 260-220 120 0 220 80 260 220-66 62-160 110-260 110-100 0-194-48-260-110Z"
+          fill="url(#tortilla)"/>
+    <path d="M570 625c28-90 96-142 210-142 114 0 182 52 210 142-54 44-130 72-210 72-80 0-156-28-210-72Z"
+          fill="rgba(0,0,0,0.22)"/>
+    <path d="M560 590c70-62 160-86 230-72 54 10 96 40 122 80-96 98-258 108-352-8Z"
+          fill="url(#salsa)" opacity="0.88"/>
+    <path d="M610 625c62-50 138-60 194-38 32 12 58 34 76 60-74 62-190 64-270-22Z"
+          fill="url(#guac)" opacity="0.88"/>
+  </g>
+</svg>
+
