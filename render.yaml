@@ -1,0 +1,32 @@
+services:
+  # Backend Service (Node.js + Express)
+  - type: web
+    name: khaanakrush-backend
+    env: node
+    root: backend
+    plan: free # Optional: specify plan
+    buildCommand: npm install && npx prisma generate
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.0
+      - key: DATABASE_URL
+        sync: false # You must provide your MySQL connection string in the Render Dashboard
+      - key: CORS_ORIGIN
+        fromService:
+          type: static
+          name: khaanakrush-frontend
+          property: url
+
+  # Frontend Service (React + Vite)
+  - type: static
+    name: khaanakrush-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: khaanakrush-backend
+          property: url
