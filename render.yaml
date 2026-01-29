@@ -6,7 +6,7 @@ services:
     rootDir: backend
     plan: free # Optional: specify plan
     buildCommand: npm install && npx prisma generate
-    startCommand: npm start
+    startCommand: npx prisma db push && node prisma/seed.js && npm start
     envVars:
       - key: NODE_VERSION
         value: 22.12.0
