@@ -14,14 +14,14 @@ services:
         sync: false # You must provide your MySQL connection string in the Render Dashboard
       - key: CORS_ORIGIN
         fromService:
-          type: static
+          type: web
           name: khaanakrush-frontend
           property: url
 
   # Frontend Service (React + Vite)
   - type: web
     name: khaanakrush-frontend
-    env: static
+    runtime: static
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
     envVars:
