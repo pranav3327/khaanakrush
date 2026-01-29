@@ -66,7 +66,12 @@ app.use((req, res) => {
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).json({ message: 'Internal server error.' });
+  // Return actual error message for debugging deployment issues
+  res.status(500).json({ 
+    message: 'Internal server error.', 
+    debug_error: err.message,
+    debug_code: err.code 
+  });
 });
 
 const server = app.listen(PORT, () => {
