@@ -16,7 +16,7 @@ services:
         fromService:
           type: web
           name: khaanakrush-frontend
-          property: url
+          property: host
 
   # Frontend Service (React + Vite)
   - type: web
@@ -29,4 +29,4 @@ services:
         fromService:
           type: web
           name: khaanakrush-backend
-          property: url
+          property: host
