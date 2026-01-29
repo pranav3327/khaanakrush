@@ -28,6 +28,8 @@ app.use(
       // Allow non-browser clients (curl/postman) with no Origin header
       if (!origin) return callback(null, true);
       if (ALLOWED_ORIGINS.includes(origin)) return callback(null, true);
+      // Allow all Render subdomains (for robustness)
+      if (origin.endsWith('.onrender.com')) return callback(null, true);
       return callback(null, false);
     },
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
