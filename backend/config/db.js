@@ -27,19 +27,25 @@ const {
   DATABASE_URL
 } = process.env;
 
-const parsed = DATABASE_URL ? parseDatabaseUrl(DATABASE_URL) : null;
-
-const pool = mysql.createPool({
-  host: parsed?.host ?? DB_HOST,
-  user: parsed?.user ?? DB_USER,
-  password: parsed?.password ?? DB_PASSWORD,
-  database: parsed?.database ?? DB_NAME,
-  port: Number(parsed?.port ?? DB_PORT),
+// If DATABASE_URL is provided (e.g. from Aiven), use it directly.
+// This ensures query params like ?ssl-mode=REQUIRED are respected.
+const poolConfig = DATABASE_URL || {
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_NAME,
+  port: Number(DB_PORT),
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
-  timezone: 'Z'
-});
+  timezone: 'Z',
+  // Enable SSL by default for cloud connections if not using URL
+  ssl: {
+    rejectUnauthorized: false
+  }
+};
+
+const pool = mysql.createPool(poolConfig);
 
 async function pingDb() {
   const conn = await pool.getConnection();
