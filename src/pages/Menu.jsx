@@ -14,6 +14,24 @@ function resolveImageUrl(url) {
   return v;
 }
 
+const CATEGORIES = [
+  { id: 'LIVE GRILL SPECIALS', title: 'Live Grill Specials', subtitle: '(Freshly grilled • Fast service)' },
+  { id: 'QUESA GRILLS', title: 'Quesa Grills', subtitle: '(Pressed • Cheesy • Filling)' },
+  { id: 'TACO PICKS', title: 'Taco Picks', subtitle: '(? pieces • Street style)' },
+  { id: 'QUICK BITES', title: 'Quick Bites', subtitle: '' },
+  { id: 'DISH OF THE DAY', title: 'Dish of the Day', subtitle: '' },
+  { id: 'DRINKS', title: 'Drinks', subtitle: '' },
+  { id: 'STUDENT COMBOS', title: 'Student Combos', subtitle: '(BEST VALUE)', specialClass: 'studentCombosSection' },
+  { id: 'ADD-ONS', title: 'Add-Ons', subtitle: '' }
+];
+
+const FLAVORS = [
+  'Smoky Chipotle',
+  'Creamy Jalapeño',
+  'Salsa Roja',
+  'Peri-Peri Fusion'
+];
+
 export default function Menu() {
   const { addToCart } = useCart();
 
@@ -49,6 +67,41 @@ export default function Menu() {
     };
   }, []);
 
+  const groupedItems = CATEGORIES.reduce((acc, cat) => {
+    acc[cat.id] = items.filter(i => i.category === cat.id);
+    return acc;
+  }, {});
+
+  const renderCategory = (cat) => {
+    const categoryItems = groupedItems[cat.id] || [];
+    if (categoryItems.length === 0) return null;
+
+    const isStudentCombos = cat.id === 'STUDENT COMBOS';
+    const isDishOfTheDay = cat.id === 'DISH OF THE DAY';
+
+    return (
+      <div key={cat.id} className={isStudentCombos ? 'studentCombosSection' : 'categorySection'}>
+        {isStudentCombos && <div className="studentCombosBadge">Best Value</div>}
+        
+        <div className="categoryHeader">
+          <h2 className="categoryTitle">{cat.title}</h2>
+          {cat.subtitle && !isStudentCombos && (
+            <span className="categorySubtitle">{cat.subtitle}</span>
+          )}
+          {isDishOfTheDay && (
+             <span className="limitedTimeBadge">Available for limited hours & quantity</span>
+          )}
+        </div>
+
+        <div className="menuGrid">
+          {categoryItems.map((it) => (
+            <MenuItemCard key={it.id} item={it} onAdd={addToCart} />
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="pagePad">
       <div className="container">
@@ -77,15 +130,30 @@ export default function Menu() {
               <div className="menuStateText">Please check back later.</div>
             </div>
           ) : (
-            <div className="menuGrid">
-              {items.map((it) => (
-                <MenuItemCard key={it.id} item={it} onAdd={addToCart} />
-              ))}
-            </div>
+            <>
+              {renderCategory(CATEGORIES[0])} {/* Live Grill */}
+              {renderCategory(CATEGORIES[1])} {/* Quesa Grills */}
+              {renderCategory(CATEGORIES[2])} {/* Taco Picks */}
+              
+              {/* Flavor Section */}
+              <div className="flavorSection">
+                <div className="flavorTitle">Choose Your Flavour</div>
+                <div className="flavorList">
+                  {FLAVORS.map(flavor => (
+                    <span key={flavor} className="flavorItem">{flavor}</span>
+                  ))}
+                </div>
+              </div>
+
+              {renderCategory(CATEGORIES[3])} {/* Quick Bites */}
+              {renderCategory(CATEGORIES[4])} {/* Limited Time */}
+              {renderCategory(CATEGORIES[5])} {/* Drinks */}
+              {renderCategory(CATEGORIES[6])} {/* Student Combos */}
+              {renderCategory(CATEGORIES[7])} {/* Add-ons */}
+            </>
           )}
         </div>
       </div>
     </div>
   );
 }
-

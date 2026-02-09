@@ -35,15 +35,16 @@ async function createOrderWithItems({ customer_name, phone, delivery_location, i
 
       const priceEach = Number(menuRows[0].price);
       const qty = Number(it.quantity);
+      const flavor = it.flavor ? String(it.flavor).slice(0, 100) : null;
       const lineTotal = priceEach * qty;
       total += lineTotal;
 
       await conn.query(
         `
-          INSERT INTO order_items (order_id, menu_item_id, quantity, price_each, line_total)
-          VALUES (?, ?, ?, ?, ?)
+          INSERT INTO order_items (order_id, menu_item_id, quantity, flavor, price_each, line_total)
+          VALUES (?, ?, ?, ?, ?, ?)
         `,
-        [orderId, it.menu_item_id, qty, priceEach, lineTotal]
+        [orderId, it.menu_item_id, qty, flavor, priceEach, lineTotal]
       );
     }
 

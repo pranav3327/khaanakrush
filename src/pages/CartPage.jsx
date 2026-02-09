@@ -63,7 +63,8 @@ export default function CartPage() {
         event_time: checkout.event_time,
         items: cart.map((ci) => ({
           menu_item_id: ci.id,
-          quantity: ci.quantity
+          quantity: ci.quantity,
+          flavor: ci.flavor
         }))
       };
       const data = await placeOrder(payload);
@@ -103,9 +104,12 @@ export default function CartPage() {
             <h2 className="sectionTitle">Your Selection</h2>
             <div className="cartItemsList">
               {cart.map((ci) => (
-                <div className="cartItemRow" key={ci.id}>
+                <div className="cartItemRow" key={`${ci.id}-${ci.flavor || 'default'}`}>
                   <div className="cartItemInfo">
-                    <div className="cartItemName">{ci.name}</div>
+                    <div className="cartItemName">
+                      {ci.name}
+                      {ci.flavor && <span style={{ fontSize: '0.85em', color: 'var(--gold)', marginLeft: '6px' }}>({ci.flavor})</span>}
+                    </div>
                     <div className="cartItemPrice">{money(ci.price)} x {ci.quantity}</div>
                   </div>
                   <div className="cartItemTotal">{money(ci.price * ci.quantity)}</div>

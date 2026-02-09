@@ -39,6 +39,7 @@ model order_items {
   order_id    BigInt
   menu_item_id BigInt
   quantity    Int
+  flavor      String?  @db.VarChar(100)
   price_each  Decimal  @db.Decimal(10, 2)
   line_total  Decimal  @db.Decimal(10, 2)
   created_at  DateTime @default(now())

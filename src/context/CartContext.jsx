@@ -18,30 +18,41 @@ export function CartProvider({ children }) {
 
   function addToCart(item) {
     setCart((prev) => {
-      const idx = prev.findIndex((p) => p.id === item.id);
+      // Check for matching ID AND matching flavor
+      const idx = prev.findIndex((p) => p.id === item.id && p.flavor === item.flavor);
       if (idx >= 0) {
         const copy = [...prev];
         copy[idx] = { ...copy[idx], quantity: copy[idx].quantity + 1 };
         return copy;
       }
-      return [...prev, { id: item.id, name: item.name, price: item.price, quantity: 1, image_url: item.image_url }];
+      return [
+        ...prev, 
+        { 
+          id: item.id, 
+          name: item.name, 
+          price: item.price, 
+          quantity: 1, 
+          image_url: item.image_url,
+          flavor: item.flavor || null 
+        }
+      ];
     });
   }
 
   function inc(item) {
-    setCart((prev) => prev.map((p) => (p.id === item.id ? { ...p, quantity: p.quantity + 1 } : p)));
+    setCart((prev) => prev.map((p) => (p.id === item.id && p.flavor === item.flavor ? { ...p, quantity: p.quantity + 1 } : p)));
   }
 
   function dec(item) {
     setCart((prev) =>
       prev
-        .map((p) => (p.id === item.id ? { ...p, quantity: Math.max(1, p.quantity - 1) } : p))
+        .map((p) => (p.id === item.id && p.flavor === item.flavor ? { ...p, quantity: Math.max(1, p.quantity - 1) } : p))
         .filter(Boolean)
     );
   }
 
   function remove(item) {
-    setCart((prev) => prev.filter((p) => p.id !== item.id));
+    setCart((prev) => prev.filter((p) => !(p.id === item.id && p.flavor === item.flavor)));
   }
 
   function clearCart() {

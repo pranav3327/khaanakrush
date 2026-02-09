@@ -1,22 +1,45 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useCart } from '../context/CartContext';
+import { fetchMenuItems } from '../services/menuService';
+import { API_BASE_URL } from '../services/api';
 import './Home.css';
 import coffeeBeansBg from '../assets/coffee-beans.svg';
 import heroDrink from '../assets/hero-drink.svg';
 import heroFood from '../assets/hero-food.svg';
 import mexicanFood from '../assets/mexican-food.svg';
 
+function resolveImageUrl(url) {
+  const v = String(url || '');
+  if (!v) return '';
+  if (v.startsWith('http://') || v.startsWith('https://')) return v;
+  if (v.startsWith('/')) return `${API_BASE_URL}${v}`;
+  return v;
+}
+
 export default function Home() {
   const { addToCart } = useCart();
+  const [dishOfTheDay, setDishOfTheDay] = useState(null);
 
-  const dishOfTheDay = {
-    id: 'dish-of-the-day-mexican',
-    name: 'Mexican Street Plate',
-    price: 240,
-    image_url: mexicanFood,
-    description: 'Crisp • spicy • modern flavours',
-    is_veg: true 
-  };
+  useEffect(() => {
+    async function loadDish() {
+      try {
+        const data = await fetchMenuItems();
+        const list = Array.isArray(data) ? data : data?.items || [];
+        // Find the first item in 'DISH OF THE DAY' category
+        const found = list.find(i => i.category === 'DISH OF THE DAY');
+        if (found) {
+          setDishOfTheDay({
+            ...found,
+            image_url: resolveImageUrl(found.image_url)
+          });
+        }
+      } catch (err) {
+        console.error('Failed to load dish of the day:', err);
+      }
+    }
+    loadDish();
+  }, []);
 
   return (
     <div>
@@ -66,23 +89,25 @@ export default function Home() {
           </div>
 
           <div className="heroRight animate-enter" style={{ animationDelay: '0.2s' }}>
-             <div className="dishCard">
-                <div className="dishCardGlow"></div>
-                <div className="dishCardImage">
-                  <img src={mexicanFood} alt="Mexican Street Plate" />
-                </div>
-                <div className="dishCardContent">
-                  <div className="dishTag">Dish of the Day</div>
-                  <h3 className="dishTitle">Mexican Street Plate</h3>
-                  <p className="dishDesc">Crisp • spicy • modern flavours</p>
-                  <div className="dishMeta">
-                     <span className="dishPrice">₹240</span>
-                     <button type="button" className="dishBtn" onClick={() => addToCart(dishOfTheDay)}>
-                       Add +
-                     </button>
+             {dishOfTheDay && (
+               <div className="dishCard">
+                  <div className="dishCardGlow"></div>
+                  <div className="dishCardImage">
+                    <img src={dishOfTheDay.image_url} alt={dishOfTheDay.name} />
                   </div>
-                </div>
-             </div>
+                  <div className="dishCardContent">
+                    <div className="dishTag">Dish of the Day</div>
+                    <h3 className="dishTitle">{dishOfTheDay.name}</h3>
+                    <p className="dishDesc">{dishOfTheDay.description}</p>
+                    <div className="dishMeta">
+                       <span className="dishPrice">₹{Number(dishOfTheDay.price).toFixed(0)}</span>
+                       <button type="button" className="dishBtn" onClick={() => addToCart(dishOfTheDay)}>
+                         Add +
+                       </button>
+                    </div>
+                  </div>
+               </div>
+             )}
           </div>
         </div>
       </section>
