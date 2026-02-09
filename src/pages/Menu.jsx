@@ -135,15 +135,7 @@ export default function Menu() {
               {renderCategory(CATEGORIES[1])} {/* Quesa Grills */}
               {renderCategory(CATEGORIES[2])} {/* Taco Picks */}
               
-              {/* Flavor Section */}
-              <div className="flavorSection">
-                <div className="flavorTitle">Choose Your Flavour</div>
-                <div className="flavorList">
-                  {FLAVORS.map(flavor => (
-                    <span key={flavor} className="flavorItem">{flavor}</span>
-                  ))}
-                </div>
-              </div>
+
 
               {renderCategory(CATEGORIES[3])} {/* Quick Bites */}
               {renderCategory(CATEGORIES[4])} {/* Limited Time */}
