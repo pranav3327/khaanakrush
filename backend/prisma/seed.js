@@ -2,81 +2,232 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient({});
 
 async function main() {
-  const count = await prisma.menu_items.count();
-  if (count > 0) {
-    console.log('Database already seeded.');
-    return;
-  }
+  console.log('Clearing existing menu items...');
+  // Delete all existing items to ensure clean slate with new structure
+  await prisma.menu_items.deleteMany({});
 
-  console.log('Seeding menu items...');
+  console.log('Seeding new menu items...');
+  
+  const menuItems = [
+    // 1. LIVE GRILL SPECIALS
+    {
+      name: 'Spice Circuit',
+      description: 'Beans • Veggies • Mexican spice hit',
+      price: 99,
+      category: 'LIVE GRILL SPECIALS',
+      image_url: '/static/menu/spice-circuit.svg', // Placeholder
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'Masala Melt',
+      description: 'Indian-spiced paneer • Grilled veggies',
+      price: 109,
+      category: 'LIVE GRILL SPECIALS',
+      image_url: '/static/menu/masala-melt.svg', // Placeholder
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'The Crunch Riot (Signature)',
+      description: 'Paneer • Cheese • Crunch layer • Premium sauce',
+      price: 139,
+      category: 'LIVE GRILL SPECIALS',
+      image_url: '/static/menu/crunch-riot.svg', // Placeholder
+      is_veg: true,
+      is_available: true
+    },
+
+    // 2. QUESA GRILLS
+    {
+      name: 'Cheesy Veggie Quesa',
+      description: 'Veggies • Melted cheese',
+      price: 119,
+      category: 'QUESA GRILLS',
+      image_url: '/static/menu/cheesy-veggie-quesa.svg',
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'Paneer Power Quesa',
+      description: 'Spiced paneer • Cheese',
+      price: 139,
+      category: 'QUESA GRILLS',
+      image_url: '/static/menu/paneer-power-quesa.svg',
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'Loaded Veg Quesa',
+      description: 'Extra veg • Cheese • Sauce',
+      price: 149,
+      category: 'QUESA GRILLS',
+      image_url: '/static/menu/loaded-veg-quesa.svg',
+      is_veg: true,
+      is_available: true
+    },
+
+    // 3. TACO PICKS
+    {
+      name: 'Pinto Bean Street Taco',
+      description: 'Beans • Veggies • Salsa',
+      price: 119,
+      category: 'TACO PICKS',
+      image_url: '/static/menu/pinto-bean-taco.svg',
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'Crispy Veg Taco',
+      description: 'Crunchy base • Veg filling',
+      price: 129,
+      category: 'TACO PICKS',
+      image_url: '/static/menu/crispy-veg-taco.svg',
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'Mexican Paneer Taco',
+      description: 'Paneer • Sauce • Fresh crunch',
+      price: 139,
+      category: 'TACO PICKS',
+      image_url: '/static/menu/mexican-paneer-taco.svg',
+      is_veg: true,
+      is_available: true
+    },
+
+    // 4. QUICK BITES
+    {
+      name: 'Cheesy Nacho Crunch',
+      description: 'Doritos • Hot nacho cheese',
+      price: 79,
+      category: 'QUICK BITES',
+      image_url: '/static/menu/nachos.svg',
+      is_veg: true,
+      is_available: true
+    },
+
+    // 5. LIMITED-TIME SPECIAL
+    {
+      name: 'White Sauce Skillet Pasta',
+      description: 'Creamy white sauce pasta',
+      price: 139,
+      category: 'LIMITED-TIME SPECIAL',
+      image_url: '/static/menu/pasta.svg',
+      is_veg: true,
+      is_available: true
+    },
+
+    // 6. DRINKS
+    {
+      name: 'Brain Freeze Protocol',
+      description: '250 ml',
+      price: 89,
+      category: 'DRINKS',
+      image_url: '/static/menu/drink.svg',
+      is_veg: true,
+      is_available: true
+    },
+
+    // 7. STUDENT COMBOS
+    {
+      name: 'Crunch Combo',
+      description: 'Spice Circuit + Fries',
+      price: 179,
+      category: 'STUDENT COMBOS',
+      image_url: '/static/menu/combo.svg',
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'Power Combo',
+      description: 'Masala Melt + Fries',
+      price: 199,
+      category: 'STUDENT COMBOS',
+      image_url: '/static/menu/combo.svg',
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'Riot Combo',
+      description: 'The Crunch Riot + Fries',
+      price: 229,
+      category: 'STUDENT COMBOS',
+      image_url: '/static/menu/combo.svg',
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'Quesa Combo',
+      description: 'Cheesy Veggie Quesa + Fries',
+      price: 219,
+      category: 'STUDENT COMBOS',
+      image_url: '/static/menu/combo.svg',
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'Taco Duo Combo',
+      description: 'Any Taco (2 pcs) + Fries',
+      price: 209,
+      category: 'STUDENT COMBOS',
+      image_url: '/static/menu/combo.svg',
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'Brain Freeze Protocol Add-On',
+      description: 'Add to any combo',
+      price: 49,
+      category: 'STUDENT COMBOS',
+      image_url: '/static/menu/drink-addon.svg',
+      is_veg: true,
+      is_available: true
+    },
+
+    // 8. ADD-ONS
+    {
+      name: 'Extra Cheese',
+      description: 'Add-on',
+      price: 20,
+      category: 'ADD-ONS',
+      image_url: '/static/menu/cheese.svg',
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'Extra Paneer',
+      description: 'Add-on',
+      price: 30,
+      category: 'ADD-ONS',
+      image_url: '/static/menu/paneer.svg',
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'Crunch Layer',
+      description: 'Add-on',
+      price: 15,
+      category: 'ADD-ONS',
+      image_url: '/static/menu/crunch.svg',
+      is_veg: true,
+      is_available: true
+    },
+    {
+      name: 'Premium Sauce',
+      description: 'Add-on',
+      price: 15,
+      category: 'ADD-ONS',
+      image_url: '/static/menu/sauce.svg',
+      is_veg: true,
+      is_available: true
+    }
+  ];
+
   await prisma.menu_items.createMany({
-    data: [
-      {
-        name: 'Paneer Tikka Skewers',
-        description: 'Char-grilled paneer with spice glaze, served hot off the cart.',
-        price: 220,
-        image_url: '/static/menu/paneer-tikka.svg',
-        is_veg: true,
-        is_available: true
-      },
-      {
-        name: 'Butter Chicken Kulcha Bowl',
-        description: 'Creamy makhani chicken with soft kulcha bites and onion crunch.',
-        price: 320,
-        image_url: '/static/menu/butter-chicken.svg',
-        is_veg: false,
-        is_available: true
-      },
-      {
-        name: 'Delhi-Style Chaat Trio',
-        description: 'Tamarind, mint, and spice — a balanced chaat plate built for freshness.',
-        price: 180,
-        image_url: '/static/menu/chaat-trio.svg',
-        is_veg: true,
-        is_available: true
-      },
-      {
-        name: 'Tawa Veg Pulao',
-        description: 'Aromatic, lightly spiced pulao finished on a hot tawa with vegetables.',
-        price: 210,
-        image_url: '/static/menu/tawa-pulao.svg',
-        is_veg: true,
-        is_available: true
-      },
-      {
-        name: 'Kebab Roll Signature',
-        description: 'Juicy kebab roll with crisp onions and a tangy chutney finish.',
-        price: 260,
-        image_url: '/static/menu/kebab-roll.svg',
-        is_veg: false,
-        is_available: true
-      },
-      {
-        name: 'Malai Corn & Cheese Cups',
-        description: 'Creamy corn with cheese, served as a warm cart cup.',
-        price: 160,
-        image_url: '/static/menu/malai-corn.svg',
-        is_veg: true,
-        is_available: true
-      },
-      {
-        name: 'Tandoori Soya Chaap',
-        description: 'Smoky, marinated soya chaap with a charred, premium finish.',
-        price: 240,
-        image_url: '/static/menu/soya-chaap.svg',
-        is_veg: true,
-        is_available: true
-      },
-      {
-        name: 'Gulab Jamun Warm Serve',
-        description: 'Soft gulab jamun served warm with a delicate saffron note.',
-        price: 140,
-        image_url: '/static/menu/gulab-jamun.svg',
-        is_veg: true,
-        is_available: true
-      }
-    ]
+    data: menuItems
   });
+  
   console.log('Seeding completed.');
 }
 
