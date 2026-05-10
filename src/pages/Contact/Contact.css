@@ -1,0 +1,190 @@
+/* ═══ CONTACT HERO ═══ */
+.contact-hero {
+  background: var(--charcoal);
+  height: 40vh;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 var(--space-lg);
+}
+.contact-hero h1 {
+  font-family: var(--font-display);
+  color: white;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: var(--space-sm);
+}
+.contact-hero p {
+  color: rgba(255,255,255,0.55);
+  font-size: 1.1rem;
+}
+
+/* ═══ CONTACT GRID ═══ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+/* Info cards */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.contact-info-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  border-left: 3px solid var(--red);
+  transition: var(--transition);
+}
+.contact-info-card:hover {
+  transform: translateX(4px);
+}
+.contact-info-card__icon {
+  font-size: 1.8rem;
+  color: var(--saffron);
+}
+.contact-info-card__label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+.contact-info-card__value {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--charcoal);
+}
+a.contact-info-card__value:hover {
+  color: var(--red);
+}
+.contact-whatsapp {
+  background: #25D366;
+  color: white;
+  padding: 14px 24px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+  margin-top: var(--space-sm);
+  align-self: flex-start;
+}
+.contact-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37,211,102,0.3);
+}
+
+/* Contact form */
+.contact-form-wrap {
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 32px;
+}
+.contact-form h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-bottom: var(--space-lg);
+}
+.contact-form__submit {
+  width: 100%;
+  margin-top: var(--space-sm);
+}
+.contact-form__success {
+  background: rgba(45,106,79,0.08);
+  color: var(--green);
+  padding: 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ═══ FRANCHISE SECTION ═══ */
+.franchise-section {
+  background: var(--charcoal);
+  padding: var(--space-xl) var(--space-lg);
+  margin-top: var(--space-xl);
+}
+.franchise-section__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.franchise-section__text h2 {
+  font-family: var(--font-display);
+  color: white;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin-bottom: var(--space-md);
+}
+.franchise-section__text p {
+  color: rgba(255,255,255,0.55);
+  margin-bottom: var(--space-md);
+}
+.franchise-section__text ul {
+  margin-bottom: var(--space-lg);
+}
+.franchise-section__text li {
+  color: var(--green);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.franchise-section__form-wrap {
+  background: rgba(255,255,255,0.06);
+  border-radius: var(--radius-md);
+  padding: 28px;
+}
+.franchise-section__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.franchise-section__form input {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+.franchise-section__form input::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+.franchise-section__form input:focus {
+  border-color: var(--saffron);
+  box-shadow: 0 0 0 3px rgba(255,109,0,0.15);
+}
+.franchise-section__success {
+  color: var(--green);
+  font-weight: 600;
+  text-align: center;
+  padding: 20px;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .franchise-section__inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

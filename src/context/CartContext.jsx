@@ -1,9 +1,9 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
 
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState(() => {
+  const [cartItems, setCartItems] = useState(() => {
     try {
       const saved = localStorage.getItem('khanakrush_cart');
       return saved ? JSON.parse(saved) : [];
@@ -13,56 +13,72 @@ export function CartProvider({ children }) {
   });
 
   useEffect(() => {
-    localStorage.setItem('khanakrush_cart', JSON.stringify(cart));
-  }, [cart]);
+    localStorage.setItem('khanakrush_cart', JSON.stringify(cartItems));
+  }, [cartItems]);
 
-  function addToCart(item) {
-    setCart((prev) => {
-      // Check for matching ID AND matching flavor
-      const idx = prev.findIndex((p) => p.id === item.id && p.flavor === item.flavor);
+  const addToCart = useCallback((item) => {
+    setCartItems((prev) => {
+      const idx = prev.findIndex((p) => p.id === item.id);
       if (idx >= 0) {
         const copy = [...prev];
-        copy[idx] = { ...copy[idx], quantity: copy[idx].quantity + 1 };
+        copy[idx] = { ...copy[idx], qty: copy[idx].qty + 1 };
         return copy;
       }
       return [
-        ...prev, 
-        { 
-          id: item.id, 
-          name: item.name, 
-          price: item.price, 
-          quantity: 1, 
-          image_url: item.image_url,
-          flavor: item.flavor || null 
-        }
+        ...prev,
+        {
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          qty: 1,
+          image: item.image_url || item.image || null,
+          category: item.category || null,
+          is_veg: item.is_veg !== undefined ? item.is_veg : true,
+        },
       ];
     });
-  }
+  }, []);
 
-  function inc(item) {
-    setCart((prev) => prev.map((p) => (p.id === item.id && p.flavor === item.flavor ? { ...p, quantity: p.quantity + 1 } : p)));
-  }
+  const removeFromCart = useCallback((id) => {
+    setCartItems((prev) => prev.filter((p) => p.id !== id));
+  }, []);
 
-  function dec(item) {
-    setCart((prev) =>
-      prev
-        .map((p) => (p.id === item.id && p.flavor === item.flavor ? { ...p, quantity: Math.max(1, p.quantity - 1) } : p))
-        .filter(Boolean)
+  const updateQty = useCallback((id, qty) => {
+    if (qty < 1) return;
+    setCartItems((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, qty } : p))
     );
-  }
+  }, []);
 
-  function remove(item) {
-    setCart((prev) => prev.filter((p) => !(p.id === item.id && p.flavor === item.flavor)));
-  }
+  const clearCart = useCallback(() => {
+    setCartItems([]);
+  }, []);
 
-  function clearCart() {
-    setCart([]);
-  }
+  const cartTotal = useMemo(
+    () => cartItems.reduce((acc, item) => acc + item.price * item.qty, 0),
+    [cartItems]
+  );
 
-  const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const cartCount = useMemo(
+    () => cartItems.reduce((acc, item) => acc + item.qty, 0),
+    [cartItems]
+  );
+
+  const value = useMemo(
+    () => ({
+      cartItems,
+      addToCart,
+      removeFromCart,
+      updateQty,
+      clearCart,
+      cartTotal,
+      cartCount,
+    }),
+    [cartItems, addToCart, removeFromCart, updateQty, clearCart, cartTotal, cartCount]
+  );
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, inc, dec, remove, clearCart, cartCount }}>
+    <CartContext.Provider value={value}>
       {children}
     </CartContext.Provider>
   );

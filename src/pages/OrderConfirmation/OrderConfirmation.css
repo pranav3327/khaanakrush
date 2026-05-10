@@ -1,0 +1,213 @@
+/* ═══ ORDER CONFIRMATION ═══ */
+.oc-page {
+  padding-bottom: var(--space-2xl);
+}
+
+/* Hero */
+.oc-hero {
+  text-align: center;
+  padding: 120px var(--space-lg) 48px;
+}
+.oc-check {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto var(--space-lg);
+}
+.oc-check .success-check__svg {
+  width: 100px;
+  height: 100px;
+}
+.oc-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  margin-bottom: var(--space-sm);
+}
+.oc-order-id {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--muted);
+}
+.oc-order-id span {
+  color: var(--red);
+  font-weight: 700;
+}
+.oc-sub {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-top: var(--space-sm);
+}
+
+/* Tracking */
+.oc-tracking {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg) var(--space-xl);
+}
+.oc-tracking__steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+}
+.oc-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+.oc-step__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+  background: var(--cream);
+  border: 2px solid var(--border);
+  transition: var(--transition);
+}
+.oc-step--complete .oc-step__icon {
+  background: var(--green);
+  border-color: var(--green);
+}
+.oc-step--active .oc-step__icon {
+  background: var(--saffron);
+  border-color: var(--saffron);
+  animation: pulse 1.5s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,109,0,0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(255,109,0,0); }
+}
+.oc-step__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.oc-step--complete .oc-step__label { color: var(--green); }
+.oc-step--active .oc-step__label { color: var(--saffron); }
+
+.oc-step__line {
+  position: absolute;
+  top: 26px;
+  left: calc(50% + 30px);
+  right: calc(-50% + 30px);
+  height: 2px;
+  background: var(--border);
+}
+.oc-step--complete .oc-step__line {
+  background: var(--green);
+}
+
+.oc-tracking__note {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: var(--space-lg);
+}
+
+/* Summary */
+.oc-summary {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+.oc-summary__card {
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-lg);
+  text-align: center;
+}
+.oc-summary__eta-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.oc-summary__eta-time {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--saffron);
+}
+
+/* CTAs */
+.oc-ctas {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  padding: var(--space-xl) var(--space-lg);
+  flex-wrap: wrap;
+}
+.oc-btn--whatsapp {
+  background: #25D366;
+  color: white;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+.oc-btn--whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37,211,102,0.3);
+}
+
+/* Rating */
+.oc-rate {
+  text-align: center;
+  padding: 0 var(--space-lg);
+}
+.oc-rate h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-bottom: var(--space-md);
+}
+.oc-rate__stars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.oc-rate__star {
+  font-size: 2.5rem;
+  color: var(--border);
+  transition: color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+.oc-rate__star:hover { transform: scale(1.2); }
+.oc-rate__star--active { color: var(--gold); }
+.oc-rate__thanks {
+  color: var(--green);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Success check reuse - keep consistent with BookEvent */
+.oc-page .success-check__circle {
+  stroke: var(--green);
+  stroke-width: 2;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: drawCircle 0.6s ease forwards;
+}
+.oc-page .success-check__check {
+  stroke: var(--green);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: drawCheck 0.3s ease 0.5s forwards;
+}
+@keyframes drawCircle { to { stroke-dashoffset: 0; } }
+@keyframes drawCheck { to { stroke-dashoffset: 0; } }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 600px) {
+  .oc-tracking__steps { flex-direction: column; align-items: center; gap: 16px; }
+  .oc-step__line { display: none; }
+}

@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #0b0b0f;
+  background: var(--charcoal);
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@
   transform: translateX(-50%);
   width: 200px;
   height: 400px;
-  background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.15), transparent 70%);
+  background: radial-gradient(ellipse at top, rgba(232, 34, 10, 0.15), transparent 70%); /* var(--red) hint */
   z-index: 1;
   opacity: 0;
   pointer-events: none;
@@ -58,25 +58,25 @@
 }
 
 .cartWrapper {
-  width: 160px;
-  height: 160px;
+  width: 180px;
+  height: 180px;
   position: relative;
   z-index: 2;
   /* Animation: Enter fast, drift/skid, stop */
-  animation: driftEnter 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation: driftEnter 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 .cartSvg {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
 }
 
 /* Wheels spin */
 .wheel {
   transform-box: fill-box;
   transform-origin: center;
-  animation: wheelSpin 1.5s ease-out forwards;
+  animation: wheelSpin 1.4s ease-out forwards;
 }
 
 /* Steam rising after stop */
@@ -100,11 +100,11 @@
 
 .skidMarks {
   position: absolute;
-  bottom: 30px;
+  bottom: 40px;
   left: -20px;
-  width: 100px;
-  height: 6px;
-  background: rgba(255,255,255,0.1);
+  width: 120px;
+  height: 8px;
+  background: rgba(255,255,255,0.08);
   transform-origin: right center;
   transform: scaleX(0);
   border-radius: 4px;
@@ -114,7 +114,7 @@
 /* Smoke Particles */
 .smokeParticles {
   position: absolute;
-  bottom: 25px;
+  bottom: 35px;
   left: 0;
   width: 100%;
   height: 20px;
@@ -122,7 +122,7 @@
 }
 .smokeParticles span {
   position: absolute;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 248, 237, 0.25); /* var(--cream) */
   border-radius: 50%;
   opacity: 0;
 }
@@ -141,39 +141,46 @@
 
 .road {
   position: absolute;
-  bottom: 40px;
+  bottom: 50px;
   left: -50%;
   width: 200%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(217, 179, 95, 0.3), transparent);
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--saffron), transparent);
   z-index: 1;
 }
 
 /* --- Typography --- */
 .splashTitle {
-  font-family: var(--serif);
-  font-size: 3rem;
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 900;
   margin: 0;
   display: flex;
-  gap: 10px;
+  gap: 12px;
   opacity: 0;
   transform: translateY(20px);
   animation: textReveal 0.8s ease forwards 1.2s; /* Start after cart settles */
 }
 
 .splashText {
-  color: #fff;
+  color: var(--cream);
+  text-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 .splashText.highlight {
-  background: linear-gradient(135deg, var(--gold2), var(--gold));
+  background: linear-gradient(135deg, var(--saffron), var(--red));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: none;
 }
 
 .splashSubtitle {
-  margin-top: 10px;
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.6);
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--gold);
   opacity: 0;
   animation: textReveal 0.8s ease forwards 1.6s;
 }

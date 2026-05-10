@@ -1,0 +1,33 @@
+:root {
+  /* Brand Colors */
+  --red:        #E8220A;
+  --saffron:    #FF6D00;
+  --cream:      #FFF8ED;
+  --charcoal:   #1A1208;
+  --gold:       #C8960C;
+  --green:      #2D6A4F;
+  --muted:      #7A6652;
+  --card-bg:    #FFFDF7;
+  --border:     #EDE0CC;
+
+  /* Typography */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-mono:    'Space Mono', monospace;
+
+  /* Spacing scale */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  32px;
+  --space-xl:  64px;
+  --space-2xl: 120px;
+
+  /* Effects */
+  --shadow-card:  0 4px 24px rgba(26,18,8,0.10);
+  --shadow-hover: 0 12px 40px rgba(232,34,10,0.18);
+  --radius-sm:    8px;
+  --radius-md:    16px;
+  --radius-pill:  999px;
+  --transition:   all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}

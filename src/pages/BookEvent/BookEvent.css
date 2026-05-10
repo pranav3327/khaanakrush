@@ -1,0 +1,238 @@
+/* ═══ BOOK EVENT HERO ═══ */
+.be-hero {
+  position: relative;
+  height: 50vh;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('https://images.unsplash.com/photo-1613514785940-daed07799d9b?w=1400&q=80');
+  background-size: cover;
+  background-position: center;
+}
+.be-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26,18,8,0.7);
+}
+.be-hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 var(--space-lg);
+}
+.be-hero__breadcrumb {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: var(--space-md);
+}
+.be-hero__breadcrumb a {
+  color: rgba(255,255,255,0.5);
+  transition: color 0.2s;
+}
+.be-hero__breadcrumb a:hover { color: var(--saffron); }
+.be-hero__content h1 {
+  font-family: var(--font-display);
+  color: white;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  max-width: 700px;
+  margin: 0 auto var(--space-md);
+}
+.be-hero__content p {
+  color: rgba(255,255,255,0.6);
+  font-size: 1.1rem;
+}
+
+/* ═══ EVENT TYPE CARDS ═══ */
+.be-types {
+  padding: var(--space-xl) var(--space-lg);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.be-types__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.be-type-card {
+  position: relative;
+  height: 300px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--charcoal), #2a1f10);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.be-type-card:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=400&q=80'); background-size: cover; background-position: center; }
+.be-type-card:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=400&q=80'); background-size: cover; background-position: center; }
+.be-type-card:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1613514785940-daed07799d9b?w=400&q=80'); background-size: cover; background-position: center; }
+
+.be-type-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26,18,8,0.85) 0%, rgba(26,18,8,0.2) 100%);
+  transition: var(--transition);
+}
+.be-type-card:hover .be-type-card__overlay {
+  background: linear-gradient(to top, rgba(26,18,8,0.7) 0%, rgba(26,18,8,0.1) 100%);
+}
+.be-type-card__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  z-index: 1;
+}
+.be-type-card__icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+.be-type-card h3 {
+  font-family: var(--font-display);
+  color: white;
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+.be-type-card p {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.85rem;
+}
+
+/* ═══ BOOKING FORM ═══ */
+.be-form-section {
+  padding: 0 var(--space-lg) var(--space-2xl);
+  display: flex;
+  justify-content: center;
+}
+.be-form {
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  padding: 48px;
+  max-width: 720px;
+  width: 100%;
+}
+.be-form h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+.be-form__section-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: var(--space-lg) 0 var(--space-md);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.be-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+.be-form__error-banner {
+  background: rgba(232,34,10,0.08);
+  color: var(--red);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-md);
+  font-size: 0.9rem;
+}
+
+/* Checkboxes */
+.be-form__checkboxes {
+  margin-bottom: var(--space-md);
+}
+.be-form__check-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.be-form__checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 16px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.be-form__checkbox input[type="checkbox"] {
+  accent-color: var(--red);
+  width: 16px;
+  height: 16px;
+}
+
+.be-form__submit {
+  width: 100%;
+  margin-top: var(--space-lg);
+  padding: 18px;
+  font-size: 1.05rem;
+}
+
+/* ═══ SUCCESS PAGE ═══ */
+.success-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px var(--space-lg);
+}
+.success-page__inner {
+  text-align: center;
+  max-width: 500px;
+}
+.success-page__inner h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  margin: var(--space-lg) 0 var(--space-md);
+}
+.success-page__inner p {
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* Success checkmark animation */
+.success-check {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+}
+.success-check__svg {
+  width: 80px;
+  height: 80px;
+}
+.success-check__circle {
+  stroke: var(--green);
+  stroke-width: 2;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: drawCircle 0.6s ease forwards;
+}
+.success-check__check {
+  stroke: var(--green);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: drawCheck 0.3s ease 0.5s forwards;
+}
+@keyframes drawCircle {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Reuse form-field and spinner from Menu.css — they're global enough */
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 768px) {
+  .be-types__grid { grid-template-columns: 1fr; }
+  .be-form__row { grid-template-columns: 1fr; }
+  .be-form { padding: 24px; margin: 0 var(--space-md); }
+}

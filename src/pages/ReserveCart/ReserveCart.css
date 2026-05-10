@@ -1,0 +1,128 @@
+/* ═══ RESERVE CART HERO ═══ */
+.rc-hero {
+  position: relative;
+  height: 50vh;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--saffron) 0%, var(--red) 100%);
+  background-image: url('https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=1400&q=80');
+  background-size: cover;
+  background-position: center;
+}
+.rc-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,109,0,0.85) 0%, rgba(232,34,10,0.75) 100%);
+}
+.rc-hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 var(--space-lg);
+}
+.rc-hero__content h1 {
+  font-family: var(--font-display);
+  color: white;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin-bottom: var(--space-md);
+}
+.rc-hero__content p {
+  color: rgba(255,255,255,0.85);
+  font-size: 1.1rem;
+}
+
+/* ═══ STEPS ═══ */
+.rc-steps {
+  padding: var(--space-xl) var(--space-lg);
+  background: var(--cream);
+}
+.rc-steps__inner {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.rc-step {
+  text-align: center;
+  flex: 1;
+}
+.rc-step__num {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--red);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: var(--space-sm);
+}
+.rc-step__icon {
+  display: block;
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+.rc-step p {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ═══ FORM ═══ */
+.rc-form-section {
+  padding: 0 var(--space-lg) var(--space-2xl);
+  display: flex;
+  justify-content: center;
+}
+.rc-form {
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  padding: 48px;
+  max-width: 720px;
+  width: 100%;
+}
+.rc-form h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+/* Day buttons */
+.rc-days {
+  margin-bottom: var(--space-md);
+}
+.rc-days__grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.rc-day-btn {
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--cream);
+  color: var(--charcoal);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.rc-day-btn:hover { border-color: var(--red); color: var(--red); }
+.rc-day-btn--active {
+  background: var(--red);
+  color: white;
+  border-color: var(--red);
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 768px) {
+  .rc-steps__inner { flex-direction: column; gap: 24px; }
+  .rc-form { padding: 24px; margin: 0 var(--space-md); }
+}
