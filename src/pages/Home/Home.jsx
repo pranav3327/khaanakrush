@@ -58,9 +58,9 @@ function HeroSection() {
       <div className="hero__content">
         <span className="hero__pill">🌮 Now Rolling into Your Neighborhood</span>
         <h1 className="hero__heading">
-          <span className="hero__line hero__line--1">Fresh Mexican.</span>
-          <span className="hero__line hero__line--2">Your Doorstep.</span>
-          <span className="hero__line hero__line--3">Cooked <span className="hero__red">Live.</span></span>
+          <span className="hero__line hero__line--1">See it cook.</span>
+          <span className="hero__line hero__line--2">Eat it Fresh.</span>
+          <span className="hero__line hero__line--3">Anywhere <span className="hero__red">Live.</span></span>
         </h1>
         <p className="hero__sub">
           KhaanaKrush brings a live Mexican food cart to your home,
